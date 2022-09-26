@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -8,15 +9,18 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  // Future apicall() async {
+  //   http.Response response;
+  //   http.get("");
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          "MainScreen",
-          style: TextStyle(fontSize: 50),
-        ),
-      ),
+          child: Container(
+        child: Text(""),
+      )),
     );
   }
 }

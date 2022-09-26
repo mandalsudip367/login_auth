@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login_auth/Routes.dart';
+import 'package:login_auth/Screens/MainScreen.dart';
+import 'package:login_auth/Screens/SignUp.dart';
 import 'package:login_auth/Screens/firebase.dart';
 
 void main() {
@@ -16,8 +19,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: MyRoutes.MainScreen,
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const FBPage(),
+      // home: const FBPage(),
+      routes: {
+        "/": (context) => FBPage(),
+        "/MainScreen": (context) => MainScreen(),
+        "/Signup": (context) => SignUpScreen()
+      },
     );
   }
 }

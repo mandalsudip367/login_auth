@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_auth/Routes.dart';
 import 'package:login_auth/Screens/MainScreen.dart';
+import 'package:login_auth/Screens/SignUp.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _validator = GlobalKey<FormState>();
+
   static Future<User?> loginUsingEmailPassword(
       {required String email,
       required String password,
@@ -87,30 +88,53 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 35,
               ),
-              ElevatedButton(
-                  onPressed: () async {
-                    if (_validator.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data...')),
-                      );
-                      await Future.delayed(Duration(seconds: 3));
-                      User? user = await loginUsingEmailPassword(
-                          email: _emailcontroler.text,
-                          password: _passwordcontroler.text,
-                          context: context);
-                      print(user);
-                      if (user != null) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainScreen()));
-                      }
-                    }
-                  },
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(color: Colors.black),
-                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      onPressed: () async {
+                        if (_validator.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data...')),
+                          );
+                          await Future.delayed(Duration(seconds: 3));
+                          User? user = await loginUsingEmailPassword(
+                              email: _emailcontroler.text,
+                              password: _passwordcontroler.text,
+                              context: context);
+                          print(user);
+                          if (user != null) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreen()));
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpScreen(),
+                          ));
+                    },
+                    child: Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),
